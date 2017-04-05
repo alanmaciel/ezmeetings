@@ -1,24 +1,23 @@
-# README
+#Aplicacion para reserva de salas de juntas conectado a mi cuenta de Google
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Caso de uso:
 
-Things you may want to cover:
+1. Entro al sitio y me firmo con mi cuenta de Google Apps
+2. Creo mi empresa
+3. Dentro de mi empresa creo edificios y mientras estoy en el formulario de alta de edificios agrego dinámicamente campos para agregar las salas con su nombre, capacidad de personas
+4. Para reservar una sala entro al buscador por capacidad y ubicación, selecciono un horario para ver salas disponibles y reservo una.
 
-* Ruby version
+Gemas a utilizar como minimo:
 
-* System dependencies
+* Devise
+* Omniauth
+* Haml
+* Simple form
 
-* Configuration
+##Factor Awesome, escoge al menos una de estas:
 
-* Database creation
+- Opcion A (nivel de complejidad 3): Integración con Google Calendar para que cada sala tenga su calendario y refleje si esta ocupada o no
 
-* Database initialization
+- Opcion B (nivel de complejidad 1): Alta de N características de salas (proyector, pintarron, corcho, videoconferencia, bocinas) y poder filtrar por estas características
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Opcion C (nivel de complejidad 2): Poder invitar personas a la reservación integrándose a mis contactos de Google Apps.
