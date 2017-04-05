@@ -7,6 +7,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'b8bffa9956fa751d503aff1d5a3a53942ac12f7d992f425c0b7a3c1f29affa25a9f04651e4d1881eb2d32721fad3909b4104e45194bf53a28e037c9ed8c4e1bb'
+  config.secret_key = '18b4ab4eb08f537daa7d6effc1d5123b829bdedb5a49cb3d10e42b4f69f2632c11635686080d3d9041ebd78b077944792399a0a50a681f8af1111e17320baa41'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -154,7 +155,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 8..72
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -271,4 +272,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth :google_oauth2, Rails.application.secrets.omniauth_provider_key, Rails.application.secrets.omniauth_provider_secret, { name: "google" }
+  
 end
