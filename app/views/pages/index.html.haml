@@ -1,2 +1,4 @@
-%h1 Welcome to EZ-Meetings
-%p this is it.
+- if user_signed_in?
+  = render "pages/dashboard"
+- else
+  = render "pages/welcome"

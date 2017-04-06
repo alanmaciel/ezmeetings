@@ -1,0 +1,30 @@
+= fa_stacked_icon "industry inverse", base: "circle", class: "fa-2x pull-left"
+%h1 Companies
+- if current_user.companies.exists?
+  %div.panel.panel-info
+    %div.panel-heading Companies
+    %div.panel-body
+      %p Dentro de cada empresa puedes crear edificios y mientras estas en el formulario de alta de edificios puedes agregar dinámicamente campos para agregar las salas con su nombre y capacidad de personas.
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.offset Name 
+          %th
+      %tbody
+      - current_user.companies.each do |company|
+        %tr
+          %td= link_to company.name, company_path(company)
+          %td.text-right
+            = link_to company, class: "btn btn-success btn-sm" do
+              %i.glyphicon.glyphicon-eye-open
+            = link_to edit_company_path(company), class: "btn btn-warning btn-sm" do
+              %i.glyphicon.glyphicon-pencil
+            = link_to company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" do
+              %i.glyphicon.glyphicon-remove-sign
+    %div.panel-footer.text-right
+      = link_to new_company_path, class: "btn btn-primary" do
+        %i.glyphicon.glyphicon-plus-sign
+        Add a new Company
+- else
+  %p You don't have any company yet, please create a new company now:
+  = link_to "New Company", new_company_path, class: "btn btn-primary"

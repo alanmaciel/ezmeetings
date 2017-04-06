@@ -37,6 +37,7 @@ gem 'omniauth-google-oauth2'
 
 gem 'simple_form'
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 gem 'haml'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
