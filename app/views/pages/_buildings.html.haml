@@ -1,8 +1,0 @@
-%table.table.table-hover
-  %thead
-    %tr
-      %th Building
-  %tbody
-  - current_user.companies.first.buildings.each do |building|
-    %tr
-      %td= building.name

@@ -1,0 +1,15 @@
+= fa_stacked_icon "group inverse", base: "circle", class: "fa-2x pull-left"
+%h1 Meeting Rooms
+- if @building.meeting_rooms.exists?
+  %div.panel.panel-info
+    %div.panel-heading Meeting Rooms list
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.offset Name 
+          %th Capacity
+      %tbody
+        = render @meeting_rooms
+    %div.panel-footer.text-right
+- else
+  = render "shared/empty_list"

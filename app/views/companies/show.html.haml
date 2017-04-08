@@ -1,7 +1,22 @@
-= fa_stacked_icon "industry inverse", base: "circle", class: "fa-2x pull-left"
+= fa_stacked_icon "building inverse", base: "circle", class: "fa-2x pull-left"
 %h1= @company.name
-
-%h3 Buildings
-= render @buildings || "shared/empty_list"
-
-= link_to "New Building", new_building_path, class: "btn btn-primary"
+- if @buildings.exists?
+  %div.panel.panel-info
+    %div.panel-heading Buildings list
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.offset Building Name 
+          %th Meeting Rooms
+          %th
+      %tbody
+        = render @buildings
+    %div.panel-footer.text-right
+      = link_to new_company_building_path(@company), class: "btn btn-primary" do
+        %i.glyphicon.glyphicon-plus-sign
+        Add a new Building
+- else
+  = render "shared/empty_list"
+  = link_to new_company_building_path(@company), class: "btn btn-danger" do
+    %i.glyphicon.glyphicon-plus-sign
+    Add your first Building!

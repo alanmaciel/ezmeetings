@@ -1,0 +1,10 @@
+%tr
+  %td= link_to building.name, company_building_path(@company, building)
+  %td= building.meeting_rooms.count
+  %td.text-right
+    = link_to company_building_path(@company, building), class: "btn btn-success btn-sm" do
+      %i.glyphicon.glyphicon-eye-open
+    = link_to edit_company_building_path(@company, building), class: "btn btn-warning btn-sm" do
+      %i.glyphicon.glyphicon-pencil
+    = link_to company_building_path(@company, building), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" do
+      %i.glyphicon.glyphicon-remove-sign

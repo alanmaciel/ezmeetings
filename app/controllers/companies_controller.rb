@@ -1,7 +1,9 @@
 class CompaniesController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def show
     load_company
+    load_company_buildings
   end
 
   def new
@@ -32,6 +34,14 @@ class CompaniesController < ApplicationController
 
   private
 
+  def load_company
+    @company = company_scope.find(params[:id])
+  end
+
+  def load_company_buildings
+    @buildings = @company.buildings
+  end
+
   def build_company
     @company ||= company_scope.build
     @company.attributes = company_params
@@ -50,9 +60,5 @@ class CompaniesController < ApplicationController
 
   def company_scope
     current_user.companies.all
-  end
-
-  def load_company
-    @company = company_scope.find(params[:id])
   end
 end

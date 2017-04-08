@@ -1,12 +1,13 @@
-!!!
+!!! 5
 %html
   %head
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
     %title EZ-Meetings
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %link{:href => "https://fonts.googleapis.com/css?family=Kaushan+Script", :rel => "stylesheet", :type => "text/css"}/
-  %body
+  %body.nord
     = render "layouts/header"
     .container
       = render "shared/flash_messages"

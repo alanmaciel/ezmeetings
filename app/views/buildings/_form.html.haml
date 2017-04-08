@@ -1,0 +1,13 @@
+= simple_form_for [@company, @building] do |f|
+  = f.error_notification
+  = f.input :name
+  %h3 Meeting Rooms
+  #meeting_rooms
+    = f.simple_fields_for :meeting_rooms do |meeting_room|
+      = render 'meeting_room_fields', f: meeting_room
+    .links
+      = link_to_add_association 'add meeting room', f, :meeting_rooms
+  = f.button :submit, class: 'btn btn-primary', disable_with: 'Please wait...'
+
+  = link_to 'Cancel', company_buildings_path(@company), class: 'btn btn-link'
+

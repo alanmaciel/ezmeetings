@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
-  get 'pages/index'
+  devise_for :users, controllers: { omniauth_callbacks: 'auth/callbacks' }
 
-  resources :companies
-  resources :buildings
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "pages#index"
+  resources :companies do
+    resources :buildings
+  end
+
+  get 'pages/index'
+  root to: 'pages#index'
 end

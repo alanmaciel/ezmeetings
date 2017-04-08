@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -38,7 +39,11 @@ gem 'omniauth-google-oauth2'
 gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+
 gem 'haml'
+
+gem 'cocoon'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
