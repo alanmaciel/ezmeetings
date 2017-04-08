@@ -11,26 +11,15 @@
       %ul.nav.navbar-nav
         %li.active
           %a{:href => "#"} Home
-        %li= link_to "Action", root_path
+        %li= link_to "Reservations", root_path
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
+            Companies
             %span.caret
           %ul.dropdown-menu
-            %li
-              %a{:href => "#"} Action
-            %li
-              %a{:href => "#"} Another action
-            %li
-              %a{:href => "#"} Something else here
-            %li.divider{:role => "separator"}
-            %li.dropdown-header Nav header
-            %li
-              %a{:href => "#"} Separated link
-            %li
-              %a{:href => "#"} One more separated link
-        %li
-          %a{:href => "#about"} About
+            %li= link_to "Companies list", companies_path
+            %li= link_to "Add a new Company", new_company_path
+        %li= link_to "About", pages_about_path
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to current_user.email, edit_user_registration_path
