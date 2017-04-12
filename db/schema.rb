@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20170410154023) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "buildings", force: :cascade do |t|
     t.string   "name"
     t.integer  "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_buildings_on_company_id"
+    t.index ["company_id"], name: "index_buildings_on_company_id", using: :btree
   end
 
   create_table "companies", force: :cascade do |t|
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170410154023) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_companies_on_user_id"
+    t.index ["user_id"], name: "index_companies_on_user_id", using: :btree
   end
 
   create_table "meeting_rooms", force: :cascade do |t|
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170410154023) do
     t.integer  "building_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["building_id"], name: "index_meeting_rooms_on_building_id"
+    t.index ["building_id"], name: "index_meeting_rooms_on_building_id", using: :btree
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170410154023) do
     t.integer  "meeting_room_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["meeting_room_id"], name: "index_reservations_on_meeting_room_id"
+    t.index ["meeting_room_id"], name: "index_reservations_on_meeting_room_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,8 +65,12 @@ ActiveRecord::Schema.define(version: 20170410154023) do
     t.datetime "updated_at",                          null: false
     t.string   "provider"
     t.string   "uid"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "buildings", "companies"
+  add_foreign_key "companies", "users"
+  add_foreign_key "meeting_rooms", "buildings"
+  add_foreign_key "reservations", "meeting_rooms"
 end
