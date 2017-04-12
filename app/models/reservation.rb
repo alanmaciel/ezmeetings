@@ -17,7 +17,7 @@ class Reservation < ApplicationRecord
   end
 
   def self.get_meeting_rooms(building_id, attendees)
-    MeetingRoom.where("building_id == ? AND capacity >= ?", building_id, attendees)
+    MeetingRoom.where("building_id = ? AND capacity >= ?", building_id, attendees)
   end
 
   def self.search(params)
