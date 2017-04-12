@@ -11,14 +11,15 @@
       %ul.nav.navbar-nav
         %li.active
           %a{:href => "#"} Home
-        %li= link_to "Reservations", root_path
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Companies
-            %span.caret
-          %ul.dropdown-menu
-            %li= link_to "Companies list", companies_path
-            %li= link_to "Add a new Company", new_company_path
+        - if user_signed_in?
+          %li= link_to "Reservations", reservations_path
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Companies
+              %span.caret
+            %ul.dropdown-menu
+              %li= link_to "Companies list", companies_path
+              %li= link_to "Add a new Company", new_company_path
         %li= link_to "About", pages_about_path
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

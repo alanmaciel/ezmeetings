@@ -4,7 +4,7 @@ class PagesController < ApplicationController
       redirect_to controller: 'companies', action: 'index'
     end
   end
-  
+
   def about
   end
 end

@@ -1,0 +1,57 @@
+.container
+  %section
+    .row.search
+      .col-sm-12
+        = form_tag(reservations_path, method: "get") do
+          %fieldset
+            %legend
+              %h3 Search for availables meeting rooms
+            .row
+              .col-sm-6.group1.form-group
+                = label_tag(:building_id, 'Building:')
+                = collection_select 'search', :building_id, @buildings, :id, :name, { include_blank: false }, class: 'form-control'
+              .col-sm-6.group1.form-group
+                = label_tag(:attendees, 'attendees:')
+                = text_field_tag('search[attendees]', nil, class: 'form-control')
+              .col-sm-6.group1.form-group
+                = label_tag(:start_at, 'Start at:')
+                = select_datetime(Date.today, prefix: "search[begin_at]")
+              .col-sm-6.group1.form-group
+                = label_tag(:ends_at, 'Ends at:')
+                = select_datetime(Date.today, prefix: "search[ends_at]")
+              .col-sm-6
+              .col-sm-3.col-sm-offset-3.text-right
+                = submit_tag 'Search', class: 'btn btn-success submit-search'
+
+- unless @search_result.nil?
+  - unless @search_result.empty?
+    %section
+      %hr/
+      .row.result
+        .col-sm-12
+          %form{:action => new_reservation_path}
+            .table-responsive
+              %table-responsive
+                %table.table.table-hover
+                  %caption
+                    %h3 Choose a meeting room and make the reservation
+                  %thead
+                    %tr
+                      %th
+                      %th name
+                      %th attendees/max. capacity
+                      %th building
+                      %th schedule
+                    %tbody
+                      - @search_result.each do |meeting_room|
+                        %tr
+                          %td= radio_button :reservation, :meeting_room_id, meeting_room.id
+                          %td= meeting_room.name
+                          %td= "#{@attendees} / #{meeting_room.capacity}"
+                          %td= meeting_room.building.name
+                          %td= "From #{@begin_at} to #{@ends_at}"
+            = hidden_field_tag :begin_at, @begin_at
+            = hidden_field_tag :ends_at, @ends_at
+            = hidden_field_tag :building_id, @building_id
+            = hidden_field_tag :attendees, @attendees
+            = submit_tag 'Make reservation', class: 'btn btn-primary'

@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'auth/callbacks' }
 
-  resources :companies do
-    resources :buildings
-  end
+  root to: 'pages#index'
 
   get 'pages/index'
   get 'pages/about'
 
-  root to: 'pages#index'
+  resources :reservations
+  resources :companies do
+    resources :buildings
+  end
+
 end

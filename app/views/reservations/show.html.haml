@@ -1,0 +1,29 @@
+.container
+  .row.booking-details
+    .col-sm-12
+      %section
+        .table-responsive
+          %table.table.table-hover.table-striped
+            %caption
+              %h2 Reservation details:
+            %tbody
+              %tr
+                %td Reservation id:
+                %td= @reservation.id
+              %tr
+                %td Meeting Title:
+                %td= @reservation.title
+              %tr
+                %td Meeting Room:
+                %td= @reservation.meeting_room.name
+              %tr
+                %td Building:
+                %td= @reservation.meeting_room.building.name
+              %tr
+                %td Begin at:
+                %td= @reservation.begin_at
+              %tr
+                %td Ends at:
+                %td= @reservation.ends_at
+          %br/
+          = link_to 'Search for another reservation', reservations_path
