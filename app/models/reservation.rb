@@ -7,21 +7,11 @@ class Reservation < ApplicationRecord
   validates :title, presence: true
 
   def self.get_begin_date(params)
-    # DateTime.civil(params[:search][:start_at][:year].to_i,
-    #                params[:search][:start_at][:month].to_i,
-    #                params[:search][:start_at][:day].to_i,
-    #                params[:search][:start_at][:hour].to_i,
-    #                params[:search][:start_at][:minute].to_i)
     ("#{params[:search][:begin_at][:year]}-#{params[:search][:begin_at][:month]}-#{params[:search][:begin_at][:day]} 
       #{params[:search][:begin_at][:hour]}:#{params[:search][:begin_at][:minute]}").to_datetime
   end
 
   def self.get_end_date(params)
-    # DateTime.civil(params[:search][:ends_at][:year].to_i,
-    #                params[:search][:ends_at][:month].to_i,
-    #                params[:search][:ends_at][:day].to_i,
-    #                params[:search][:ends_at][:hour].to_i,
-    #                params[:search][:ends_at][:minute].to_i)
     ("#{params[:search][:ends_at][:year]}-#{params[:search][:ends_at][:month]}-#{params[:search][:ends_at][:day]} 
       #{params[:search][:ends_at][:hour]}:#{params[:search][:ends_at][:minute]}").to_datetime
   end

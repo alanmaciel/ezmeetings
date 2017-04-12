@@ -11,7 +11,7 @@
       %ul.nav.navbar-nav
         %li.active
           %a{:href => "#"} Home
-        - if user_signed_in?
+        - if user_signed_in? && current_user.companies.exists?
           %li= link_to "Reservations", reservations_path
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
