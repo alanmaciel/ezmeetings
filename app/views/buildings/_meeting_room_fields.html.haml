@@ -2,10 +2,14 @@
   .form-inline
     = f.input :name, :placeholder => 'meeting room name', class: 'form-control'
     = f.input :capacity, :placeholder => 'add capacity (people)', class: 'form-control'
-    = link_to_remove_association f, data: {:confirm => 'are you sure?'}, class: 'btn btn-default btn-xs' do
+    = link_to_remove_association f, data: {:confirm => 'are you sure?'}, class: 'btn btn-danger btn-sm' do
       .glyphicon.glyphicon-remove
-  .equipment_meeting_room
-    = f.simple_fields_for :equipment_meeting_rooms do |equipment_meeting_room|
-      = render 'equipment_meeting_room_fields', :f => equipment_meeting_room
-    .links
-    = link_to_add_association 'add an equipment', f, :equipment_meeting_rooms
+  %h4 Equipment
+  .well.well-compact
+    .equipment_meeting_room
+      = f.simple_fields_for :equipment_meeting_rooms do |equipment_meeting_room|
+        = render 'equipment_meeting_room_fields', :f => equipment_meeting_room
+      .links
+      = link_to_add_association f, :equipment_meeting_rooms, class: 'btn btn-success btn-sm' do
+        .glyphicon.glyphicon-plus-sign  add equipment
+
