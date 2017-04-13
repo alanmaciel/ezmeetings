@@ -43,9 +43,11 @@ class Reservation < ApplicationRecord
     equipments = equipments.reject { |c| c.empty? }
     equipments = equipments.map(&:to_i)
 
-    meeting_rooms1 = get_meeting_rooms(building_id, attendees)
-    meeting_rooms = get_meeting_rooms_with_equipment(equipments, meeting_rooms1) 
+    meeting_rooms = get_meeting_rooms(building_id, attendees)
     available_meeting_rooms = []
+
+    meeting_rooms = get_meeting_rooms_with_equipment(equipments, meeting_rooms) unless equipments.empty?
+    
     meeting_rooms.each do |meeting_room|
       available_meeting_rooms << meeting_room if meeting_room.available?(start_date, ends_date)
     end
