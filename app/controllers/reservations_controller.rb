@@ -1,8 +1,14 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_company
+  before_action :set_building, only: [:show, :edit, :update, :destroy]
+
 
   def index
-    @buildings = Building.all
+    @company = current_user.companies.find(params[:company_id])
+    @buildings = @company.buildings.all
+
+    @equipments = Equipment.all
     return if params[:search].nil?
     @search_result = Reservation.search(params)
 
@@ -37,7 +43,7 @@ class ReservationsController < ApplicationController
     @reservation = meeting_room.reservations.new(reservation_params)
     if @reservation.save
       flash[:success] = 'Reservation created'
-      redirect_to @reservation
+      redirect_to company_reservation_path(@company, @reservation)
     else
       flash[:danger] = 'Reservation failed'
       render :new
@@ -49,6 +55,14 @@ class ReservationsController < ApplicationController
   end
 
   private
+
+  def set_company
+    @company = current_user.companies.find(params[:company_id])
+  end
+
+  def set_building
+    @building = @company.buildings.find(params[:id])
+  end
 
   def search_params
     params.require(:search).permit(:building_id, :capacity, :start_at, :ends_at)

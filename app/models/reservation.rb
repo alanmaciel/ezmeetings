@@ -16,7 +16,8 @@ class Reservation < ApplicationRecord
       #{params[:search][:ends_at][:hour]}:#{params[:search][:ends_at][:minute]}").to_datetime
   end
 
-  def self.get_meeting_rooms(building_id, attendees=0)
+  def self.get_meeting_rooms(building_id, attendees)
+    attendees = 0 if attendees == ""
     MeetingRoom.where("building_id = ? AND capacity >= ?", building_id, attendees)
   end
 
@@ -27,7 +28,7 @@ class Reservation < ApplicationRecord
     building_id = params[:search][:building_id]
     attendees = params[:search][:attendees]
 
-    meeting_rooms = get_meeting_rooms(building_id, attendees=0)
+    meeting_rooms = get_meeting_rooms(building_id, attendees)
     available_meeting_rooms = []
     meeting_rooms.each do |meeting_room|
       available_meeting_rooms << meeting_room if meeting_room.available?(start_date, ends_date)

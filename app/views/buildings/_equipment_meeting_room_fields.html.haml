@@ -1,7 +1,7 @@
 .nested-fields.equipment-meeting-room-fields
 
   .form-inline
-    .equipment_from_list{:style => "display:inline;"}
+    .equipment_from_list{:style => "display: inline;"}
       = f.association :equipment, collection: Equipment.order(:name), prompt: 'Choose an existing equipment', label: false
     = link_to_add_association 'or create a new equipment', f, :equipment, class: 'add-equipment'
     = link_to_remove_association f, class: 'remove-equipment btn btn-default btn-xs' do

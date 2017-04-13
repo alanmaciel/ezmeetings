@@ -26,4 +26,4 @@
                 %td Ends at:
                 %td= @reservation.ends_at.to_formatted_s(:long) 
           %br/
-          = link_to 'Search for another reservation', reservations_path
+          = link_to 'Search for another reservation', company_reservations_path(@company)

@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get 'pages/index'
   get 'pages/about'
 
-  resources :reservations
   resources :companies do
+    resources :reservations
     resources :buildings
   end
 

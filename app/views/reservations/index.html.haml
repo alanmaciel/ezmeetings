@@ -2,14 +2,15 @@
   %section
     .row.search
       .col-sm-12
-        = form_tag(reservations_path, method: "get") do
+        = form_tag(company_reservations_path(@company), method: "get") do
           %fieldset
             %legend
-              %h3 Search for availables meeting rooms
+              %h3= "Search for availables meeting rooms in #{@company.name}"
+
             .row
               .col-sm-6.group1.form-group
                 = label_tag(:building_id, 'Building:')
-                = collection_select 'search', :building_id, @buildings, :id, :name, { include_blank: false }, class: 'form-control'
+                = collection_select 'search', :building_id, @buildings, :id, :name, { include_blank: true }, class: 'form-control'
               .col-sm-6.group1.form-group
                 = label_tag(:attendees, 'attendees:')
                 = text_field_tag('search[attendees]', nil, class: 'form-control')
@@ -19,6 +20,9 @@
               .col-sm-6.group1.form-group
                 = label_tag(:ends_at, 'Ends at:')
                 = select_datetime(Date.today, prefix: "search[ends_at]")
+              .col-sm-12.group1.form-group
+                = label_tag(:equipment_id, 'Equipment:')
+                = collection_check_boxes 'search', :equipment_id, @equipments, :id, :name, { include_blank: false }, class: 'horizontal-checkbox'
               .col-sm-6
               .col-sm-3.col-sm-offset-3.text-right
                 = submit_tag 'Search', class: 'btn btn-success submit-search'
@@ -29,7 +33,7 @@
       %hr/
       .row.result
         .col-sm-12
-          %form{:action => new_reservation_path}
+          %form{:action => new_company_reservation_path(@company)}
             .table-responsive
               %table-responsive
                 %table.table.table-hover

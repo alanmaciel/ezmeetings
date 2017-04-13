@@ -15,6 +15,10 @@
       = link_to new_company_building_path(@company), class: "btn btn-primary" do
         %i.glyphicon.glyphicon-plus-sign
         Add a new Building
+  = link_to company_reservations_path(@company), class: "btn btn-success" do
+    %i.glyphicon.glyphicon-plus-sign
+    Add a reservation
+
 - else
   = render "shared/empty_list"
   = link_to new_company_building_path(@company), class: "btn btn-danger" do
