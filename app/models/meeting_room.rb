@@ -21,4 +21,5 @@ class MeetingRoom < ApplicationRecord
     end
     available
   end
+
 end

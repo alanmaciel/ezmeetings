@@ -17,8 +17,20 @@ class Reservation < ApplicationRecord
   end
 
   def self.get_meeting_rooms(building_id, attendees)
-    attendees = 0 if attendees == ""
+    attendees = 0 if attendees == ''
     MeetingRoom.where("building_id = ? AND capacity >= ?", building_id, attendees)
+  end
+
+  def self.get_meeting_rooms_with_equipment(req_equipments, meeting_rooms)
+    mrs = []
+    meeting_rooms.each do |mr|
+      mr.equipments.each do |e|
+        if req_equipments.include?(e.id)
+          mrs << mr
+        end
+      end
+    end
+    mrs.uniq
   end
 
   def self.search(params)
@@ -27,8 +39,12 @@ class Reservation < ApplicationRecord
 
     building_id = params[:search][:building_id]
     attendees = params[:search][:attendees]
+    equipments = params[:search][:equipment_id]
+    equipments = equipments.reject { |c| c.empty? }
+    equipments = equipments.map(&:to_i)
 
-    meeting_rooms = get_meeting_rooms(building_id, attendees)
+    meeting_rooms1 = get_meeting_rooms(building_id, attendees)
+    meeting_rooms = get_meeting_rooms_with_equipment(equipments, meeting_rooms1) 
     available_meeting_rooms = []
     meeting_rooms.each do |meeting_room|
       available_meeting_rooms << meeting_room if meeting_room.available?(start_date, ends_date)

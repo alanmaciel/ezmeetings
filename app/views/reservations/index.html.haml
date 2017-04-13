@@ -10,7 +10,7 @@
             .row
               .col-sm-6.group1.form-group
                 = label_tag(:building_id, 'Building:')
-                = collection_select 'search', :building_id, @buildings, :id, :name, { include_blank: true }, class: 'form-control'
+                = collection_select 'search', :building_id, @buildings, :id, :name, { include_blank: false }, class: 'form-control'
               .col-sm-6.group1.form-group
                 = label_tag(:attendees, 'attendees:')
                 = text_field_tag('search[attendees]', nil, class: 'form-control')
