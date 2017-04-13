@@ -39,17 +39,19 @@
                     %tr
                       %th
                       %th name
-                      %th attendees/max. capacity
+                      %th capacity
                       %th building
-                      %th schedule
+                      %th from
+                      %th to
                     %tbody
                       - @search_result.each do |meeting_room|
                         %tr
                           %td= radio_button :reservation, :meeting_room_id, meeting_room.id
                           %td= meeting_room.name
-                          %td= "#{@attendees} / #{meeting_room.capacity}"
+                          %td= "#{meeting_room.capacity}"
                           %td= meeting_room.building.name
-                          %td= "From #{@begin_at} to #{@ends_at}"
+                          %td= "#{@begin_at.to_formatted_s(:long)}"
+                          %td= "#{@ends_at.to_formatted_s(:long)}"
             = hidden_field_tag :begin_at, @begin_at
             = hidden_field_tag :ends_at, @ends_at
             = hidden_field_tag :building_id, @building_id

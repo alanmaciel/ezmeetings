@@ -18,8 +18,8 @@
               %tr
                 %td= @reservation.meeting_room.building.name
                 %td= @reservation.meeting_room.name
-                %td= @reservation.begin_at
-                %td= @reservation.ends_at
+                %td= @reservation.begin_at.to_formatted_s(:long)
+                %td= @reservation.ends_at.to_formatted_s(:long)
   %section
     .row.meeting-details
       .col-sm-12

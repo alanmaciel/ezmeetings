@@ -21,9 +21,9 @@
                 %td= @reservation.meeting_room.building.name
               %tr
                 %td Begin at:
-                %td= @reservation.begin_at
+                %td= @reservation.begin_at.to_formatted_s(:long) 
               %tr
                 %td Ends at:
-                %td= @reservation.ends_at
+                %td= @reservation.ends_at.to_formatted_s(:long) 
           %br/
           = link_to 'Search for another reservation', reservations_path
