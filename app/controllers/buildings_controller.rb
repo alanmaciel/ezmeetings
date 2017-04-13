@@ -58,6 +58,11 @@ class BuildingsController < ApplicationController
   end
 
   def building_params
-    params.require(:building).permit(:name, meeting_rooms_attributes: [:id, :name, :capacity, :_destroy])
+    params.require(:building).permit(
+      :name,
+      meeting_rooms_attributes: [:id, :name, :capacity, :_destroy,
+                                 equipment_attributes: [:id, :_destroy, :name],
+      equipment_meeting_rooms_attributes: [:id, :name, :_destroy, :equipment_id, equipment_attributes: [:id, :_destroy, :name]]]
+    )
   end
 end

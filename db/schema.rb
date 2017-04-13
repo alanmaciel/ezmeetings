@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412224929) do
+ActiveRecord::Schema.define(version: 20170413025324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 20170412224929) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_companies_on_user_id", using: :btree
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "equipment_meeting_rooms", force: :cascade do |t|
+    t.integer  "equipment_id"
+    t.integer  "meeting_room_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["equipment_id"], name: "index_equipment_meeting_rooms_on_equipment_id", using: :btree
+    t.index ["meeting_room_id"], name: "index_equipment_meeting_rooms_on_meeting_room_id", using: :btree
   end
 
   create_table "meeting_rooms", force: :cascade do |t|
@@ -71,6 +86,8 @@ ActiveRecord::Schema.define(version: 20170412224929) do
 
   add_foreign_key "buildings", "companies"
   add_foreign_key "companies", "users"
+  add_foreign_key "equipment_meeting_rooms", "equipment"
+  add_foreign_key "equipment_meeting_rooms", "meeting_rooms"
   add_foreign_key "meeting_rooms", "buildings"
   add_foreign_key "reservations", "meeting_rooms"
 end
