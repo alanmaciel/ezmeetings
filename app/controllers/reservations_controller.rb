@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_building, only: [:show, :edit, :update, :destroy]
+  before_action :set_building, only: [:edit, :update, :destroy]
 
 
   def index
